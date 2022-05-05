@@ -3,17 +3,12 @@ output_dir: "."
 navbar:
   title: "Jon Brock"
   left:
-    - text: "Education"
-      href: education.html
-    - text: "Professional Experience"
-      href: professional.html
-    - text: "Volunteer Experience"
-      href: volunteer.html
-    - text: "Publications"
-      href: publications.html
-    - text: "Technical Skills"
-      href: skills.html
-      
+    - text: "Professional Coding"
+      menu: 
+      - text: "Coastal Valley EMS APOT Report"
+      - href:
+    - text: "Horology"
+      href: horlogy.html
   right:
     - text: "LinkedIn"
       href: https://www.linkedin.com/in/jon-brock/
