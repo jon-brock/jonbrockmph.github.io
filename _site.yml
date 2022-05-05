@@ -1,14 +1,17 @@
-name: "Jon Brock"
 output_dir: "."
 navbar:
-  title: "Jon Brock"
+  title: "Jon Brock, MPH"
   left:
-    - text: "Professional Coding"
+    - text: "Coding Portfolio"
       menu: 
-      - text: "Coastal Valley EMS APOT Report"
-      - href:
-    - text: "Horology"
-      href: horlogy.html
+        - text: "Coastal Valley EMS APOT Report"
+        - href:
+    - text: "Personal Hobbies"
+      menu:
+        - text: "Horology"
+        - href: horology.html
+        - text: "Books"
+        - href: books.html
   right:
     - text: "LinkedIn"
       href: https://www.linkedin.com/in/jon-brock/
