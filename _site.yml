@@ -1,0 +1,26 @@
+name: "Jon Brock"
+output_dir: "."
+navbar:
+  title: "Jon Brock"
+  left:
+    - text: "Education"
+      href: education.html
+    - text: "Professional Experience"
+      href: professional.html
+    - text: "Volunteer Experience"
+      href: volunteer.html
+    - text: "Publications"
+      href: publications.html
+    - text: "Technical Skills"
+      href: skills.html
+      
+  right:
+    - text: "LinkedIn"
+      href: https://www.linkedin.com/in/jon-brock/
+    - icon: fa-envelope fa-lg
+      href: mailto:<brockj84@gmail.com>
+    - icon: fa-github fa-lg
+      href: http://github.com/jon-brock/
+output:
+  html_document:
+    theme: sandstone
