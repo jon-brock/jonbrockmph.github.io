@@ -1,0 +1,46 @@
+---
+output: html_document
+---
+
+### Education  
+
+* **Columbia University Mailman School of Public Health**, Master of Public Health (MPH), Epidemiology, May 2020 
+* **Seattle University**, Bachelor of Arts (BA), Humanities  
+
+***
+
+### Professional Experience  
+
+**California Department of Public Health (CDPH) - Public Health Informatics Section**  
+
+2022 May - Present  
+
+* *Epidemiologist / Data Source Specialist (Remote)* 
+
+**Sonoma County Department of Health Services (DHS)**  
+
+2021 February - 2022 May  
+
+* *Epidemiologist / Biostatistician (Remote)* 
+
+**Columbia University Mailman School of Public Health, Department of Epidemiology**  
+
+2020 January - 2020 May  
+
+* *Graduate Student Teaching Assistant - Application of Epidemiologic Research Methods* 
+
+**New York City Department of Health and Mental Hygiene (NYCDOHMH)**  
+
+2019 November - 2020 February  
+
+* *Health Research Training Program (HRTP) Intern – Bureau of HIV* 
+
+**ICAP at Columbia University - Harlem Prevention Center**  
+
+2018 September - 2019 March  
+
+* *HPTN 083 Study (Injectable PrEP) Outreach Worker* 
+
+
+
+***  

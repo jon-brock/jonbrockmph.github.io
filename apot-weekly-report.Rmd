@@ -1,0 +1,329 @@
+---
+title: "Coastal Valleys EMS Agency  \n Weekly APOT Report" 
+output: html_document
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+    echo = FALSE,
+    warning = FALSE,
+    message = FALSE,
+    results = "hide",
+    fig.align = "center",
+    fig.width = 10)
+```
+
+```{r load-packages}
+library(janitor)
+library(kableExtra)
+library(lubridate)
+library(patchwork)
+library(tidyverse)
+```
+
+```{r user-defined-inputs}
+#> This date needs to be a Sunday
+week_starting <- as_date("2022-04-24")
+
+#> This date needs to be a Saturday
+week_ending <- as_date("2022-04-30")
+
+#> This needs to be the file name of the current line list
+apot_file <- "20220502_apot_line_list.csv"
+```
+
+---
+subtitle: "`r wday(week_starting, label = TRUE, abbr = FALSE)`, `r week_starting` through `r wday(week_ending, label = TRUE, abbr = FALSE)`, `r week_ending`"
+---
+
+```{r data-import-and-cleaning}
+apot_data_2021_archival_data <- 
+    read_csv("./data/2021_weeks_01_to_52_apot_cleaned_data.csv", show_col_types = FALSE)
+
+apot_data_current_line_list <- 
+    read_csv(paste0("./data/", apot_file), show_col_types = FALSE) %>% 
+    clean_names() %>% 
+    rename(
+        incident_no = response_incident_number_e_response_03,
+        agency = agency_name_d_agency_03,
+        response_type = response_type_of_service_requested_e_response_05,
+        incident_disposition = disposition_incident_patient_disposition_e_disposition_12,
+        destination_name = disposition_destination_name_delivered_transferred_to_e_disposition_01,
+        destination_code = disposition_destination_code_delivered_transferred_to_e_disposition_02,
+        arrival_time = incident_patient_arrived_at_destination_date_time_e_times_11,
+        xfer_of_care_time = incident_destination_patient_transfer_of_care_date_time_e_times_12,
+        provider_notes = situation_provider_primary_impression_description_only_e_situation_11) %>% 
+    mutate(
+        across(where(is_character), str_to_lower),
+        across(c(arrival_time, xfer_of_care_time), mdy_hms),
+        incident_date = mdy(incident_date),
+        arrival_to_xfer_time_mins = minute(seconds_to_period(xfer_of_care_time - arrival_time)),
+        ep_week = epiweek(incident_date),
+        week_begin = as_date(floor_date(incident_date, unit = "weeks")),
+        destination_name = as_factor(case_when(
+            destination_name %in% c("kaiser permanente - santa rosa",
+                                    "kaiser permanente, santa rosa") ~ "kaiser permanente",
+            destination_name %in% c("santa rosa memorial hospital",
+                                    "santa rosa memorial hospital, montgomery") ~ "santa rosa memorial hospital",
+            TRUE ~ destination_name))) %>% 
+    remove_constant() %>% 
+    distinct(incident_no, .keep_all = TRUE) %>% 
+    filter(
+        !is.na(arrival_to_xfer_time_mins),
+        arrival_to_xfer_time_mins > 0,
+        incident_date <= week_ending) %>% 
+    select(-provider_notes)
+
+apot_data <- 
+    bind_rows(apot_data_2021_archival_data, apot_data_current_line_list) %>% 
+    distinct(incident_no, .keep_all = TRUE)
+```
+
+```{r set-week-and-month-breaks}
+#> This sets the x-axis date breaks for weeks beginning on Sunday and rolling 52 weeks
+week_breaks <- 
+    apot_data %>% 
+    mutate(week_begin = floor_date(incident_date, unit = "weeks")) %>% 
+    group_by(week_begin) %>% 
+    count() %>% 
+    select(-n) %>% 
+    ungroup() %>% 
+    slice_tail(n = 52) %>% 
+    filter(row_number() %% 2 == 1)
+```
+
+```{r load-logo, results = 'asis'}
+htmltools::img(src = knitr::image_uri('ems_cv_seal.png'),
+               alt = 'logo',
+               style = 'position:absolute;
+                        top:85px;
+                        right:275px;
+                        width:150px;
+                        height:150px')
+```
+
+***
+
+#### Data Metrics, Analyses, and Notes  
+
+* APOT = Ambulatory Patient Offload Time 
+* Total call volume was **`r apot_data %>% filter(ep_week == epiweek(week_starting) & year(incident_date) == "2022") %>% count()`** calls. 
+* The overall 90th percentile APOT was **`r round(apot_data %>% filter(ep_week == epiweek(week_starting) & year(incident_date) == "2022") %>% summarize(quantile(arrival_to_xfer_time_mins, .90)) %>% deframe(), 0)`** minutes, which is a(n) **`r abs(round(apot_data %>% filter(ep_week == epiweek(week_starting) & year(incident_date) == "2022") %>% summarize(quantile(arrival_to_xfer_time_mins, .90)) %>% deframe(), 0) - round(apot_data %>% filter((ep_week == epiweek(week_starting) - 1) & year(incident_date) == "2022") %>% summarize(quantile(arrival_to_xfer_time_mins, .90)) %>% deframe(), 0))`-minute `r if_else((round(apot_data %>% filter(ep_week == epiweek(week_starting) & year(incident_date) == "2022") %>% summarize(quantile(arrival_to_xfer_time_mins, .90)) %>% deframe(), 0)) > (round(apot_data %>% filter((ep_week == epiweek(week_starting) - 1) & year(incident_date) == "2022") %>% summarize(quantile(arrival_to_xfer_time_mins, .90)) %>% deframe(), 0)), "increase", "decrease")`** from the previous week.  
+
+```{r generate-table-of-apot-percentiles, results = "hold"}
+apot_data %>% 
+    filter(year(incident_date) == 2022) %>% 
+    group_by(week_begin, destination_name) %>% 
+    summarize(percentile_90 = quantile(arrival_to_xfer_time_mins, .90), .groups = "drop") %>% 
+    arrange(desc(week_begin)) %>% 
+    mutate(
+        week_begin = format(week_begin, "%b %d"),
+        destination_name = fct_relevel(
+            destination_name, "healdsburg district hospital", "kaiser permanente",
+            "petaluma valley hospital", "santa rosa memorial hospital", "sonoma valley hospital",
+            "sutter santa rosa regional hospital"),
+        destination_name = fct_relabel(destination_name, str_to_title)) %>% 
+    pivot_wider(destination_name, names_from = week_begin, values_from = percentile_90) %>% 
+    mutate(
+        across(where(is.numeric), floor),
+        across(where(is.numeric),
+               ~cell_spec(.,
+                    format = "html",
+                    bold = if_else(. >= 20, T, F),
+                    color = if_else(. >= 20, "red", "black")))) %>% 
+    select(1:13) %>% 
+    kableExtra::kable(
+        format = "html",
+        booktabs = T,
+        col.names = c("", names(.)[-1]),
+        align = "lrrrrrrrrrrrr",
+        linesep = "",
+        escape = F) %>% 
+    kable_styling(c("striped"), full_width = T) %>% 
+    column_spec(1, width = "7cm") %>%
+    add_header_above(c(" ", "Week Beginning" = 12)) %>% 
+    add_footnote(
+        "*Note: 90th Pctl. APOT Times that are 20 minutes or higher appear bolded and in red.",
+        notation = "none")
+```
+
+***
+
+# {.tabset .tabset-fade}  
+
+## 911 Transport Volume
+
+#### Sonoma County 911 Transport Volume by Epidemiological Week (Rolling 52-Weeks)  
+
+```{r plot-transport-volume}
+apot_data %>% 
+    filter(week_begin >= deframe(week_breaks[1,1])) %>% 
+    ggplot() + 
+    geom_bar(aes(week_begin), width = 5, fill = "#39a968", alpha = 0.8) + 
+    scale_x_date(date_labels = "%b %d %y", breaks = deframe(week_breaks)) + 
+    scale_y_continuous(breaks = c(0, 100, 200, 300, 400, 500, 600, 700)) + 
+    theme(
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "none") + 
+    labs(
+        x = NULL,
+        y = "Total Calls")
+```
+
+## 90th Pctl. APOT - Overall
+
+#### Sonoma County 90th Percentile APOT by Epidemiological Week (Rolling 52-Weeks)  
+
+```{r plot-90th-percentile-apot}
+apot_data %>% 
+    filter(week_begin >= deframe(week_breaks[1,1])) %>% 
+    group_by(week_begin) %>% 
+    summarize(percentile_90 = quantile(arrival_to_xfer_time_mins, .90)) %>% 
+    ggplot() + 
+    geom_path(aes(week_begin, percentile_90), size = 1.25, colour = "#e07a5f") + 
+    geom_hline(yintercept = 20, linetype = "dashed", color = "red") + 
+    scale_x_date(date_labels = "%b %d %y", breaks = deframe(week_breaks)) + 
+    scale_y_continuous(breaks = c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50)) + 
+    coord_cartesian(ylim = c(0, 50)) + 
+    theme(
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "none") + 
+    labs(
+        x = NULL,
+        y = "Minutes")
+```
+
+## 90th APOT Pctl. - Facility
+
+#### Sonoma County 90th Percentile APOT by Epidemiological Week and Hospital (Rolling 52-Weeks)  
+
+```{r plot-apot-by-week-and-hospital}
+apot_data %>% 
+    filter(week_begin >= deframe(week_breaks[1,1])) %>% 
+    group_by(week_begin, destination_name) %>% 
+    mutate(
+        destination_name = fct_relevel(
+            destination_name, "healdsburg district hospital", "kaiser permanente",
+            "petaluma valley hospital", "santa rosa memorial hospital", "sonoma valley hospital",
+            "sutter santa rosa regional hospital"),
+        destination_name = fct_relabel(destination_name, str_to_title)) %>% 
+    summarize(percentile_90 = quantile(arrival_to_xfer_time_mins, .90), .groups = "drop") %>% 
+    ggplot() + 
+    geom_path(aes(week_begin, percentile_90, colour = destination_name), size = 1.25) + 
+    geom_hline(yintercept = 20, linetype = "dashed", color = "red") + 
+    scale_x_date(date_labels = "%b %d %y", breaks = deframe(week_breaks)) + 
+    scale_y_continuous(breaks = c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50)) + 
+    coord_cartesian(ylim = c(0, 50)) + 
+    scale_colour_manual(
+        values = c("#8a765c", "#e51a36", "#476a52", "#39a968", "#975fa0", "#f8cd08")) + 
+    theme(
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "bottom",
+        legend.title = element_blank()) + 
+    labs(
+        x = NULL,
+        y = "Minutes")
+```
+
+```{r custom-functions-for-iterative-plotting}
+plot_apot_over_under_cnts <- function(x){
+    
+    apot_data %>% 
+        filter(
+            ep_week == epiweek(week_starting) & year(incident_date) == "2022",
+            destination_name == x) %>% 
+        group_by(incident_date, destination_name) %>% 
+        mutate(
+            over_under = as_factor(if_else(arrival_to_xfer_time_mins > 20, "over", "under")),
+            over_under = fct_rev(over_under)) %>% 
+        select(incident_date, destination_name, over_under) %>% 
+        ggplot() + 
+        geom_bar(aes(incident_date, ..count.., fill = over_under), alpha = 0.8) + 
+        geom_text(aes(incident_date, label = ..count.., group = over_under),
+                  stat = "count",
+                  position = position_stack(vjust = 0.5),
+                  colour = "#4d534b",
+                  size = 2.5) + 
+        scale_x_date(date_labels = "%b %d %y", date_breaks = "1 day") + 
+        scale_y_continuous(breaks = c(0, 10, 20, 30, 40, 50)) + 
+        scale_fill_manual(
+            values = c("over" = "#f8cd08", "under" = "#39a968"),
+            labels = c("Over 20 Minutes", "Less than 20 Minutes")) + 
+        coord_cartesian(ylim = c(0, 50)) + 
+        theme(
+            axis.text.x = element_text(angle = 45, hjust = 1),
+            title = element_text(size = 10),
+            legend.position = "bottom",
+            legend.title = element_blank()) + 
+        labs(
+            title = str_to_title(x),
+            x = NULL,
+            y = NULL)
+    
+}
+
+plot_apot_over_under_pcts <- function(x){
+    
+    apot_data %>% 
+    filter(
+        ep_week == epiweek(week_starting) & year(incident_date) == "2022",
+        destination_name == x) %>% 
+    group_by(incident_date, destination_name) %>% 
+    mutate(
+        over_under = as_factor(if_else(arrival_to_xfer_time_mins > 20, "over", "under")),
+        over_under = fct_rev(over_under)) %>% 
+    select(incident_date, destination_name, over_under) %>% 
+    ggplot() + 
+    geom_bar(aes(incident_date, fill = over_under), position = "fill", alpha = 0.8) + 
+    scale_x_date(date_labels = "%b %d %y", date_breaks = "1 day") + 
+    scale_y_continuous(labels = scales::percent) + 
+    scale_fill_manual(
+        values = c("over" = "#f8cd08", "under" = "#39a968"),
+        labels = c("Over 20 Minutes", "Less than 20 Minutes")) + 
+    theme(
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        title = element_text(size = 10),
+        legend.position = "bottom",
+        legend.title = element_blank()) + 
+    labs(
+        title = str_to_title(x),
+        x = NULL,
+        y = NULL)
+    
+}
+```
+
+```{r hospital-list-for-iteration}
+hospital_list_01 <- c("healdsburg district hospital", "kaiser permanente", "petaluma valley hospital")
+hospital_list_02 <- c("santa rosa memorial hospital", "sonoma valley hospital", "sutter santa rosa regional hospital")
+```
+
+## Over/Under 20 - Counts
+
+#### Counts of Calls Over or Under 20 Minutes (Reporting Week Only)
+
+```{r generate-and-combine-list-of-plots-for-counts}
+p1_c <- map(hospital_list_01, ~plot_apot_over_under_cnts(.))
+p2_c <- map(hospital_list_02, ~plot_apot_over_under_cnts(.))
+p3_c <- c(p1_c, p2_c)
+```
+
+```{r patch-together-plots-of-counts, fig.height = 8}
+wrap_plots(p3_c, guides = "collect") &
+    theme(legend.position = 'bottom')
+```
+
+## Over/Under 20 - Percentages
+
+#### Proportion of Calls Over or Under 20 Minutes (Reporting Week Only)
+
+```{r generate-and-combine-list-of-plots-for-percents}
+p1_p <- map(hospital_list_01, ~plot_apot_over_under_pcts(.))
+p2_p <- map(hospital_list_02, ~plot_apot_over_under_pcts(.))
+p3_p <- c(p1_p, p2_p)
+```
+
+```{r patch-together-plots-of-percents, fig.height = 8}
+wrap_plots(p3_p, guides = "collect") &
+    theme(legend.position = 'bottom')
+```
