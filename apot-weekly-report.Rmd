@@ -92,7 +92,7 @@ week_breaks <-
     filter(row_number() %% 2 == 1)
 ```
 
-```{r load-logo, results = 'asis'}
+```{r load-logo, results = 'asis', eval = FALSE}
 htmltools::img(src = knitr::image_uri('ems_cv_seal.png'),
                alt = 'logo',
                style = 'position:absolute;
@@ -102,13 +102,15 @@ htmltools::img(src = knitr::image_uri('ems_cv_seal.png'),
                         height:150px')
 ```
 
+<img src = "ems_cv_seal.png" style = "position: absolute; top: 85px; right: 275px; width: 150px; height: 150px"/>
+
 ***
 
-#### Data Metrics, Analyses, and Notes  
+#### Data Metrics, Analyses, and Notes
 
-* APOT = Ambulatory Patient Offload Time 
-* Total call volume was **`r apot_data %>% filter(ep_week == epiweek(week_starting) & year(incident_date) == "2022") %>% count()`** calls. 
-* The overall 90th percentile APOT was **`r round(apot_data %>% filter(ep_week == epiweek(week_starting) & year(incident_date) == "2022") %>% summarize(quantile(arrival_to_xfer_time_mins, .90)) %>% deframe(), 0)`** minutes, which is a(n) **`r abs(round(apot_data %>% filter(ep_week == epiweek(week_starting) & year(incident_date) == "2022") %>% summarize(quantile(arrival_to_xfer_time_mins, .90)) %>% deframe(), 0) - round(apot_data %>% filter((ep_week == epiweek(week_starting) - 1) & year(incident_date) == "2022") %>% summarize(quantile(arrival_to_xfer_time_mins, .90)) %>% deframe(), 0))`-minute `r if_else((round(apot_data %>% filter(ep_week == epiweek(week_starting) & year(incident_date) == "2022") %>% summarize(quantile(arrival_to_xfer_time_mins, .90)) %>% deframe(), 0)) > (round(apot_data %>% filter((ep_week == epiweek(week_starting) - 1) & year(incident_date) == "2022") %>% summarize(quantile(arrival_to_xfer_time_mins, .90)) %>% deframe(), 0)), "increase", "decrease")`** from the previous week.  
+-   APOT = Ambulatory Patient Offload Time
+-   Total call volume was **`r apot_data %>% filter(ep_week == epiweek(week_starting) & year(incident_date) == "2022") %>% count()`** calls.
+-   The overall 90th percentile APOT was **`r round(apot_data %>% filter(ep_week == epiweek(week_starting) & year(incident_date) == "2022") %>% summarize(quantile(arrival_to_xfer_time_mins, .90)) %>% deframe(), 0)`** minutes, which is a(n) **`r abs(round(apot_data %>% filter(ep_week == epiweek(week_starting) & year(incident_date) == "2022") %>% summarize(quantile(arrival_to_xfer_time_mins, .90)) %>% deframe(), 0) - round(apot_data %>% filter((ep_week == epiweek(week_starting) - 1) & year(incident_date) == "2022") %>% summarize(quantile(arrival_to_xfer_time_mins, .90)) %>% deframe(), 0))`-minute `r if_else((round(apot_data %>% filter(ep_week == epiweek(week_starting) & year(incident_date) == "2022") %>% summarize(quantile(arrival_to_xfer_time_mins, .90)) %>% deframe(), 0)) > (round(apot_data %>% filter((ep_week == epiweek(week_starting) - 1) & year(incident_date) == "2022") %>% summarize(quantile(arrival_to_xfer_time_mins, .90)) %>% deframe(), 0)), "increase", "decrease")`** from the previous week.
 
 ```{r generate-table-of-apot-percentiles, results = "hold"}
 apot_data %>% 
@@ -149,11 +151,11 @@ apot_data %>%
 
 ***
 
-# {.tabset .tabset-fade}  
+# {.tabset .tabset-fade}
 
 ## 911 Transport Volume
 
-#### Sonoma County 911 Transport Volume by Epidemiological Week (Rolling 52-Weeks)  
+#### Sonoma County 911 Transport Volume by Epidemiological Week (Rolling 52-Weeks)
 
 ```{r plot-transport-volume}
 apot_data %>% 
@@ -172,7 +174,7 @@ apot_data %>%
 
 ## 90th Pctl. APOT - Overall
 
-#### Sonoma County 90th Percentile APOT by Epidemiological Week (Rolling 52-Weeks)  
+#### Sonoma County 90th Percentile APOT by Epidemiological Week (Rolling 52-Weeks)
 
 ```{r plot-90th-percentile-apot}
 apot_data %>% 
@@ -195,7 +197,7 @@ apot_data %>%
 
 ## 90th APOT Pctl. - Facility
 
-#### Sonoma County 90th Percentile APOT by Epidemiological Week and Hospital (Rolling 52-Weeks)  
+#### Sonoma County 90th Percentile APOT by Epidemiological Week and Hospital (Rolling 52-Weeks)
 
 ```{r plot-apot-by-week-and-hospital}
 apot_data %>% 
@@ -328,7 +330,7 @@ wrap_plots(p3_p, guides = "collect") &
     theme(legend.position = "bottom")
 ```
 
-#
+# 
 
 ***
 

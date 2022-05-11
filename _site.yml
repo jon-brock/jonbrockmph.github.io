@@ -12,7 +12,7 @@ navbar:
   - icon: fa-envelope fa-lg
     href: mailto:<brockj84@gmail.com>
   - icon: fa-github fa-lg
-    href: http://github.com/jon-brock/
+    href: https://github.com/jon-brock/personal-site
 output:
   html_document:
     theme: sandstone

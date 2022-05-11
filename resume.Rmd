@@ -1,46 +1,147 @@
 ---
-output: html_document
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 4
 ---
 
-### Education  
+## Education
 
-* **Columbia University Mailman School of Public Health**, Master of Public Health (MPH), Epidemiology, May 2020 
-* **Seattle University**, Bachelor of Arts (BA), Humanities  
+#### Columbia University MSPH
+*Master of Public Health in Epidemiology, May 2020*  
+
+Relevant Coursework: 
+
+Fall 2018  
+
+* Determinants of Health 
+* Research Methods and Applications 
+
+Spring 2019  
+
+* Analysis of Categorical Data 
+* Application of Epidemiological Research Methods (SAS) 
+* Applied Regression I 
+* Epidemiology of Chronic Disease 
+* Epidemiology II: Design and Conduct of Observational Epidemiology 
+
+Fall 2019  
+
+* Applied Regression II 
+* Clinical Epidemiology 
+* Data Science I (R) 
+* Principles of Epidemiology III: Applied Epidemiological Analysis 
+
+Spring 2020  
+
+* Latent Variable and Structural Equation Modeling for Health Sciences 
+* Relational Databases and SQL Programming for Research and Data Science 
+* Neurological Epidemiology 
+
+#### City College of San Francisco  
+*Coursework in Infectious Disease Prevention for Priority Populations*
+
+#### Seattle University  
+*Bachelor of Arts in Humanities*
 
 ***
 
-### Professional Experience  
+## Professional Experience
 
-**California Department of Public Health (CDPH) - Public Health Informatics Section**  
+#### California Dept. of Public Health
 
-2022 May - Present  
+##### Epidemiologist / Data Source Specialist
+*2022-05 to Present*
 
-* *Epidemiologist / Data Source Specialist (Remote)* 
+***
 
-**Sonoma County Department of Health Services (DHS)**  
+#### Sonoma County Dept. of Health
 
-2021 February - 2022 May  
+##### 2021-02 to 2022-05
+##### Epidemiologist / Biostatistician
 
-* *Epidemiologist / Biostatistician (Remote)* 
+***
 
-**Columbia University Mailman School of Public Health, Department of Epidemiology**  
+#### ICAP at Columbia University - HPC
 
-2020 January - 2020 May  
+##### Outreach Worker  
+Conducted community outreach and engagement to disseminate information regarding PrEP  
+Recruited participants for HPTN 083 via social networking mobile apps and at designated venues  
 
-* *Graduate Student Teaching Assistant - Application of Epidemiologic Research Methods* 
+***
 
-**New York City Department of Health and Mental Hygiene (NYCDOHMH)**  
+#### San Francisco Dept. of Public Health
 
-2019 November - 2020 February  
+#####	HIV Surveillance Summer Research Associate
+Developed research hypotheses using previously collected Medical Monitoring Project (MMP) data
+Cleaned and merged interview and medical record abstraction datasets
+Drafted a research abstract pertaining to indicators of STI testing amongst PLWH in San Francisco
+Performed data cleaning and analyses using SAS v. 9.4
+	
+##### HIV Re-Linkage to Care Specialist
+Piloted an HIV molecular surveillance project to assess its impact on interrupting HIV transmission
+Re-linked not-in-care HIV+ individuals living in San Francisco back into primary medical care 
+	
+#####	Research Associate
+Recruited sampled (HIV+) participants via letters, phone calls, and field visits to their homes and medical appointments as part of the Medical Monitoring Project (MMP)
+Conducted 100+ quantitative interviews with sampled MMP participants
+Obtained informed consent from eligible MMP participants
+Provided quality assurance (QA) of interviews by observing and evaluating staff interviewers
+Coordinated with principal investigator and program manager to plan new MMP cycle roll out
+Investigated HIV labs and notifications from clinics and laboratories
+Performed cross-jurisdictional HIV/AIDS case surveillance
+Managed and oversaw all data entry for the Supplemental Surveillance Network (SSuN) project
+Developed and improved paper and electronic-based data collection tools and procedures
+	
+##### Study Recruiter
+Conducted field surveys and disseminated meth and alcohol-use research studies to recruit diverse substance-using participants
+Disseminated meth and alcohol-use research studies' objectives to potential participants
 
-* *Health Research Training Program (HRTP) Intern – Bureau of HIV* 
+***
 
-**ICAP at Columbia University - Harlem Prevention Center**  
+#### Pub. Health - Seattle & King County
+##### Disease Research and Intervention Specialist – Harborview STD Clinic
+Investigated and interpreted laboratory and clinical reports to ensure data accuracy
+Performed voluminous data entry of HIV/STI labs and case reports from laboratories and clinics
 
-2018 September - 2019 March  
+***
 
-* *HPTN 083 Study (Injectable PrEP) Outreach Worker* 
+#### San Francisco AIDS Foundation
 
+##### Lab Technician II – Per Diem – Strut Sexual Health Clinic (formerly Magnet) (04/2018 – 08/2018)
+Performed high volume venipuncture with exceptional accuracy
+Effectively and independently managed the lab duties when needed
+Provided risk reduction and HIV test counseling
+Administered and logged rapid HIV tests and CMP/Kidney Panel tests
+Triaged patients for appropriate services, including PrEP, nPEP, and HIV/STI testing and treatment
+ 
+##### Interim HIV/STI Data Manager (09/2014 – 12/2014)
+	•	Entered HIV testing data into a secure online portal for all SF AIDS Foundation affiliated clinics
+	•	Generated monthly reports reflecting clients' behavioral risks
+	•	Managed the data for all testing services
+	•	Ensured accuracy and integrity within all data entry logs (clinical services and HIV testing)
+	•	Maintained and reported electronic monthly HIV and STI testing records
 
+## Volunteer Experience
 
-***  
+	(Volunteer) Phlebotomist (07/2016 – 10/2017)
+	•	Performed high volume venipuncture with exceptional accuracy
+	•	Triaged patients for appropriate services, including PrEP, nPEP, and HIV/STI testing and treatment
+	
+	(Volunteer) HIV Test Counselor (07/2014 – 06/2017)
+	•	Provided harm reduction counseling for men who have sex with men
+	•	Disseminated HIV/STI information to patients in a culturally appropriate manner
+	•	Performed throat and rectal swabs for STI screenings
+	•	Provided training for new HIV test counselors
+	•	Disclosed rapid HIV test results to patients
+	
+	(Volunteer) Data Entry Clerk (01/2014 – 09/2014)
+	•	Entered weekly HIV testing data into a secure online portal for the CDC pertaining to the sexual behaviors and habits of men who have sex with men
+	
+08/2015 – 12/2015	SAN FRANCISCO COMMUNITY HEALTH CENTER (FORMERLY API WELLNESS CENTER)
+	(Volunteer) HIV Test Counselor
+	•	Provided harm reduction counseling for Asian and Pacific Islander men who identify as gay, bisexual, and transgender
+	•	Disseminated HIV/STI information to patients in a culturally appropriate manner
+	•	Disclosed rapid HIV test results to patients
+	•	Performed duties in non-clinical settings (gay bars, Folsom Street Fair, etc.)

@@ -29,6 +29,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -224,6 +227,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -231,6 +297,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -271,7 +347,7 @@ $(document).ready(function () {
   </a>
 </li>
 <li>
-  <a href="http://github.com/jon-brock/">
+  <a href="https://github.com/jon-brock/personal-site">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -289,56 +365,189 @@ $(document).ready(function () {
 </div>
 
 
-<div id="education" class="section level3">
-<h3>Education</h3>
+<div id="education" class="section level2">
+<h2>Education</h2>
+<div id="columbia-university-msph" class="section level4">
+<h4>Columbia University MSPH</h4>
+<p><em>Master of Public Health in Epidemiology, May 2020</em></p>
+<p>Relevant Coursework:</p>
+<p>Fall 2018</p>
 <ul>
-<li><strong>Columbia University Mailman School of Public
-Health</strong>, Master of Public Health (MPH), Epidemiology, May
-2020</li>
-<li><strong>Seattle University</strong>, Bachelor of Arts (BA),
-Humanities</li>
+<li>Determinants of Health</li>
+<li>Research Methods and Applications</li>
 </ul>
+<p>Spring 2019</p>
+<ul>
+<li>Analysis of Categorical Data</li>
+<li>Application of Epidemiological Research Methods (SAS)</li>
+<li>Applied Regression I</li>
+<li>Epidemiology of Chronic Disease</li>
+<li>Epidemiology II: Design and Conduct of Observational
+Epidemiology</li>
+</ul>
+<p>Fall 2019</p>
+<ul>
+<li>Applied Regression II</li>
+<li>Clinical Epidemiology</li>
+<li>Data Science I (R)</li>
+<li>Principles of Epidemiology III: Applied Epidemiological
+Analysis</li>
+</ul>
+<p>Spring 2020</p>
+<ul>
+<li>Latent Variable and Structural Equation Modeling for Health
+Sciences</li>
+<li>Relational Databases and SQL Programming for Research and Data
+Science</li>
+<li>Neurological Epidemiology</li>
+</ul>
+</div>
+<div id="city-college-of-san-francisco" class="section level4">
+<h4>City College of San Francisco</h4>
+<p><em>Coursework in Infectious Disease Prevention for Priority
+Populations</em></p>
+</div>
+<div id="seattle-university" class="section level4">
+<h4>Seattle University</h4>
+<p><em>Bachelor of Arts in Humanities</em></p>
 <hr />
 </div>
-<div id="professional-experience" class="section level3">
-<h3>Professional Experience</h3>
-<p><strong>California Department of Public Health (CDPH) - Public Health
-Informatics Section</strong></p>
-<p>2022 May - Present</p>
-<ul>
-<li><em>Epidemiologist / Data Source Specialist (Remote)</em></li>
-</ul>
-<p><strong>Sonoma County Department of Health Services
-(DHS)</strong></p>
-<p>2021 February - 2022 May</p>
-<ul>
-<li><em>Epidemiologist / Biostatistician (Remote)</em></li>
-</ul>
-<p><strong>Columbia University Mailman School of Public Health,
-Department of Epidemiology</strong></p>
-<p>2020 January - 2020 May</p>
-<ul>
-<li><em>Graduate Student Teaching Assistant - Application of
-Epidemiologic Research Methods</em></li>
-</ul>
-<p><strong>New York City Department of Health and Mental Hygiene
-(NYCDOHMH)</strong></p>
-<p>2019 November - 2020 February</p>
-<ul>
-<li><em>Health Research Training Program (HRTP) Intern – Bureau of
-HIV</em></li>
-</ul>
-<p><strong>ICAP at Columbia University - Harlem Prevention
-Center</strong></p>
-<p>2018 September - 2019 March</p>
-<ul>
-<li><em>HPTN 083 Study (Injectable PrEP) Outreach Worker</em></li>
-</ul>
+</div>
+<div id="professional-experience" class="section level2">
+<h2>Professional Experience</h2>
+<div id="california-dept.-of-public-health" class="section level4">
+<h4>California Dept. of Public Health</h4>
+<div id="epidemiologist-data-source-specialist" class="section level5">
+<h5>Epidemiologist / Data Source Specialist</h5>
+<p><em>2022-05 to Present</em></p>
 <hr />
+</div>
+</div>
+<div id="sonoma-county-dept.-of-health" class="section level4">
+<h4>Sonoma County Dept. of Health</h4>
+<div id="to-2022-05" class="section level5">
+<h5>2021-02 to 2022-05</h5>
+</div>
+<div id="epidemiologist-biostatistician" class="section level5">
+<h5>Epidemiologist / Biostatistician</h5>
+<hr />
+</div>
+</div>
+<div id="icap-at-columbia-university---hpc" class="section level4">
+<h4>ICAP at Columbia University - HPC</h4>
+<div id="outreach-worker" class="section level5">
+<h5>Outreach Worker</h5>
+<p>Conducted community outreach and engagement to disseminate
+information regarding PrEP<br />
+Recruited participants for HPTN 083 via social networking mobile apps
+and at designated venues</p>
+<hr />
+</div>
+</div>
+<div id="san-francisco-dept.-of-public-health" class="section level4">
+<h4>San Francisco Dept. of Public Health</h4>
+<div id="hiv-surveillance-summer-research-associate"
+class="section level5">
+<h5>HIV Surveillance Summer Research Associate</h5>
+<p>Developed research hypotheses using previously collected Medical
+Monitoring Project (MMP) data Cleaned and merged interview and medical
+record abstraction datasets Drafted a research abstract pertaining to
+indicators of STI testing amongst PLWH in San Francisco Performed data
+cleaning and analyses using SAS v. 9.4</p>
+</div>
+<div id="hiv-re-linkage-to-care-specialist" class="section level5">
+<h5>HIV Re-Linkage to Care Specialist</h5>
+<p>Piloted an HIV molecular surveillance project to assess its impact on
+interrupting HIV transmission Re-linked not-in-care HIV+ individuals
+living in San Francisco back into primary medical care</p>
+</div>
+<div id="research-associate" class="section level5">
+<h5>Research Associate</h5>
+<p>Recruited sampled (HIV+) participants via letters, phone calls, and
+field visits to their homes and medical appointments as part of the
+Medical Monitoring Project (MMP) Conducted 100+ quantitative interviews
+with sampled MMP participants Obtained informed consent from eligible
+MMP participants Provided quality assurance (QA) of interviews by
+observing and evaluating staff interviewers Coordinated with principal
+investigator and program manager to plan new MMP cycle roll out
+Investigated HIV labs and notifications from clinics and laboratories
+Performed cross-jurisdictional HIV/AIDS case surveillance Managed and
+oversaw all data entry for the Supplemental Surveillance Network (SSuN)
+project Developed and improved paper and electronic-based data
+collection tools and procedures</p>
+</div>
+<div id="study-recruiter" class="section level5">
+<h5>Study Recruiter</h5>
+<p>Conducted field surveys and disseminated meth and alcohol-use
+research studies to recruit diverse substance-using participants
+Disseminated meth and alcohol-use research studies’ objectives to
+potential participants</p>
+<hr />
+</div>
+</div>
+<div id="pub.-health---seattle-king-county" class="section level4">
+<h4>Pub. Health - Seattle &amp; King County</h4>
+<div
+id="disease-research-and-intervention-specialist-harborview-std-clinic"
+class="section level5">
+<h5>Disease Research and Intervention Specialist – Harborview STD
+Clinic</h5>
+<p>Investigated and interpreted laboratory and clinical reports to
+ensure data accuracy Performed voluminous data entry of HIV/STI labs and
+case reports from laboratories and clinics</p>
+<hr />
+</div>
+</div>
+<div id="san-francisco-aids-foundation" class="section level4">
+<h4>San Francisco AIDS Foundation</h4>
+<div
+id="lab-technician-ii-per-diem-strut-sexual-health-clinic-formerly-magnet-042018-082018"
+class="section level5">
+<h5>Lab Technician II – Per Diem – Strut Sexual Health Clinic (formerly
+Magnet) (04/2018 – 08/2018)</h5>
+<p>Performed high volume venipuncture with exceptional accuracy
+Effectively and independently managed the lab duties when needed
+Provided risk reduction and HIV test counseling Administered and logged
+rapid HIV tests and CMP/Kidney Panel tests Triaged patients for
+appropriate services, including PrEP, nPEP, and HIV/STI testing and
+treatment   ##### Interim HIV/STI Data Manager (09/2014 – 12/2014) •
+Entered HIV testing data into a secure online portal for all SF AIDS
+Foundation affiliated clinics • Generated monthly reports reflecting
+clients’ behavioral risks • Managed the data for all testing services •
+Ensured accuracy and integrity within all data entry logs (clinical
+services and HIV testing) • Maintained and reported electronic monthly
+HIV and STI testing records</p>
+</div>
+</div>
+</div>
+<div id="volunteer-experience" class="section level2">
+<h2>Volunteer Experience</h2>
+<pre><code>(Volunteer) Phlebotomist (07/2016 – 10/2017)
+•   Performed high volume venipuncture with exceptional accuracy
+•   Triaged patients for appropriate services, including PrEP, nPEP, and HIV/STI testing and treatment
+
+(Volunteer) HIV Test Counselor (07/2014 – 06/2017)
+•   Provided harm reduction counseling for men who have sex with men
+•   Disseminated HIV/STI information to patients in a culturally appropriate manner
+•   Performed throat and rectal swabs for STI screenings
+•   Provided training for new HIV test counselors
+•   Disclosed rapid HIV test results to patients
+
+(Volunteer) Data Entry Clerk (01/2014 – 09/2014)
+•   Entered weekly HIV testing data into a secure online portal for the CDC pertaining to the sexual behaviors and habits of men who have sex with men</code></pre>
+<p>08/2015 – 12/2015 SAN FRANCISCO COMMUNITY HEALTH CENTER (FORMERLY API
+WELLNESS CENTER) (Volunteer) HIV Test Counselor • Provided harm
+reduction counseling for Asian and Pacific Islander men who identify as
+gay, bisexual, and transgender • Disseminated HIV/STI information to
+patients in a culturally appropriate manner • Disclosed rapid HIV test
+results to patients • Performed duties in non-clinical settings (gay
+bars, Folsom Street Fair, etc.)</p>
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -371,6 +580,35 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
