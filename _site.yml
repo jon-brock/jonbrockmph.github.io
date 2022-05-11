@@ -6,7 +6,7 @@ navbar:
     - href: resume.html
     - text: "Coding Portfolio"
       menu: 
-        - text: "Coastal Valley EMS APOT Report"
+        - text: "Coastal Valley EMS Weekly APOT Report"
         - href: apot-weekly-report.html
         - text: "Weekly Testing Surveillance Report"
         - href: weekly-testing-surveillance-report.html
