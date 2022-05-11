@@ -310,7 +310,7 @@ p3_c <- c(p1_c, p2_c)
 
 ```{r patch-together-plots-of-counts, fig.height = 8}
 wrap_plots(p3_c, guides = "collect") &
-    theme(legend.position = 'bottom')
+    theme(legend.position = "bottom")
 ```
 
 ## Over/Under 20 - Percentages
@@ -325,5 +325,11 @@ p3_p <- c(p1_p, p2_p)
 
 ```{r patch-together-plots-of-percents, fig.height = 8}
 wrap_plots(p3_p, guides = "collect") &
-    theme(legend.position = 'bottom')
+    theme(legend.position = "bottom")
 ```
+
+#
+
+***
+
+The code that build this page is available [here](https://github.com/jon-brock/personal-site/blob/master/apot-weekly-report.Rmd).
