@@ -2,20 +2,20 @@ output_dir: "."
 navbar:
   title: "Jon Brock, MPH"
   left:
-    - text: "Resume"
-    - href: resume.html
+    #- text: "Resume"
+    #- href: resume.html
     - text: "Coding Portfolio"
       menu: 
         - text: "Coastal Valley EMS Weekly APOT Report"
         - href: apot-weekly-report.html
-        - text: "Weekly Testing Surveillance Report"
-        - href: weekly-testing-surveillance-report.html
-    - text: "Personal Hobbies"
-      menu:
-        - text: "Horology"
-        - href: horology.html
-        - text: "Books"
-        - href: books.html
+        #- text: "Weekly Testing Surveillance Report"
+        #- href: weekly-testing-surveillance-report.html
+    #- text: "Personal Hobbies"
+      #menu:
+        #- text: "Horology"
+        #- href: horology.html
+        #- text: "Books"
+        #- href: books.html
   right:
     - text: "LinkedIn"
       href: https://www.linkedin.com/in/jon-brock/
