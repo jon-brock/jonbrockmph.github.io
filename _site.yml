@@ -12,6 +12,8 @@ navbar:
       href: job-search-adventure.html
   - text: Hobbies
     menu:
+    - text: "2022-2023 Running"
+      href: running.html
     - text: Horology
       href: horology.html
     - text: Books
